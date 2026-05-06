@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./astr-migration   # 👈 IMPORTANT
+        working-directory: ./astro-version   # 👈 IMPORTANT
 
     steps:
       - name: Checkout
