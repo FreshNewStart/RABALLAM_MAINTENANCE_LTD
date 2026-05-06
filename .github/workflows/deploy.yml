@@ -1,4 +1,4 @@
-name: Deploy Astro
+name: Deploy Astro to GitHub Pages
 
 on:
   push:
@@ -14,19 +14,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
           cache: npm
-      - run: npm ci
-        working-directory: ./
 
-      - run: npm run build
-        working-directory: ./
+      - name: Install dependencies
+        run: npm ci
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Build project
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
@@ -35,4 +39,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
